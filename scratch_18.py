@@ -31,7 +31,7 @@ def balloons_per_game():
 
 
 # 遊戲時間限制
-limited_time = 30
+limited_time = 40
 # 遊戲觸發
 game_main = True
 game_active = False
@@ -48,10 +48,15 @@ screen = pg.display.set_mode((width, height))
 pg.display.set_caption("Typing speed game")
 screen.fill((255, 255, 255))
 bg1 = pg.image.load("/Users/xinyi/Desktop/background1.jpg")
+bg15 = pg.image.load("/Users/xinyi/Desktop/background15.jpg")
 bg2 = pg.image.load("/Users/xinyi/Desktop/background2.jpg")
+bg25 = pg.image.load("/Users/xinyi/Desktop/background25.jpg")
 bg3 = pg.image.load("/Users/xinyi/Desktop/background3.jpg")
+bg35 = pg.image.load("/Users/xinyi/Desktop/background35.jpg")
 bg4 = pg.image.load("/Users/xinyi/Desktop/background4.jpg")
+bg45 = pg.image.load("/Users/xinyi/Desktop/background45.jpg")
 bg5 = pg.image.load("/Users/xinyi/Desktop/background5.jpg")
+bg55 = pg.image.load("/Users/xinyi/Desktop/background55.jpg")
 bg_2 = pg.image.load("/Users/xinyi/Desktop/istockphoto-626401042-1024x1024.jpg")
 bg_3 = pg.image.load("/Users/xinyi/Desktop/maxresdefault.jpg")
 
@@ -80,27 +85,39 @@ balloon_red_ord = pg.image.load('/Users/xinyi/Desktop/redballoon.png')
 balloon_6 = pg.transform.scale(balloon_red_ord, (45, 55))
 
 sun_ord = pg.image.load('/Users/xinyi/Desktop/sun.png')
-sun = pg.transform.scale(sun_ord, (100, 100))
+sun = pg.transform.scale(sun_ord, (110, 110))
 moon_ord = pg.image.load('/Users/xinyi/Desktop/moon.png')
-moon = pg.transform.scale(moon_ord, (75, 85))
+moon = pg.transform.scale(moon_ord, (85, 95))
 star1_ord = pg.image.load('/Users/xinyi/Desktop/star1.png')
-star1 = pg.transform.scale(star1_ord, (25, 35))
+star1 = pg.transform.scale(star1_ord, (30, 30))
 star2_ord = pg.image.load('/Users/xinyi/Desktop/star2.png')
-star2 = pg.transform.scale(star2_ord, (35, 45))
+star2 = pg.transform.scale(star2_ord, (25, 25))
+
+bomb_ord = pg.image.load('/Users/xinyi/Desktop/bomb.png')
+bomb = pg.transform.scale(bomb_ord, (150, 150))
 
 
-file = r'/Users/xinyi/Desktop/closer.mp3'
-pg.mixer.init()
-track = pg.mixer.music.load(file)
 
-pg.mixer.music.play()
+# if game_main or game_result:
+#     file1 = r'/Users/xinyi/Desktop/Closer.mp3'
+#     pg.mixer.init()
+#     track = pg.mixer.music.load(file1)
+#     pg.mixer.music.play()
+#
+# if game_active:
+#     pg.mixer.music.stop()
+#     file2 = r'/Users/xinyi/Desktop/Pokemon.mp3'
+#     pg.mixer.init()
+#     track = pg.mixer.music.load(file2)
+#     pg.mixer.music.play()
 
-temp = 1
+
+
 
 # 字體與大小設定
-sfont = pg.font.SysFont("Comic Sans MS", 36)
-font = pg.font.SysFont("Comic Sans MS", 48)
-lfont = pg.font.SysFont("Comic Sans MS", 96)
+sfont = pg.font.SysFont("Comic Sans MS", 44)
+font = pg.font.SysFont("Comic Sans MS", 54)
+lfont = pg.font.SysFont("Comic Sans MS", 122)
 
 # 儲存一次遊戲中的全部字母（20個）
 total_onlyletters = onlyletters_per_game()
@@ -110,6 +127,7 @@ total_numletters = numletters_per_game()
 total_balloons = balloons_per_game()
 pg.display.update()
 
+temp = 0
 
 # 關閉程式的程式碼
 while True:
@@ -144,48 +162,69 @@ while True:
 
         # 遊戲還未開始時執行的操作
         if game_main:
+            file1 = r'/Users/xinyi/Desktop/Closer.mp3'
+            pg.mixer.init()
+            track = pg.mixer.music.load(file1)
+            pg.mixer.music.play()
+
             screen.blit(bg_2, (0, 0))
             text = sfont.render("Press enter to start", True, (0, 0, 0), (255, 255, 255))
-            screen.blit(text, (370, 500))
+            screen.blit(text, (341, 500))
             text = lfont.render("Typing Game", True, (0, 0, 0), (255, 255, 255))
-            screen.blit(text, (270, 200))
+            screen.blit(text, (215, 240))
 
 
 
         # 遊戲進行時執行的操作
         if game_active:
-            if temp == 1:
+
+            file2 = r'/Users/xinyi/Desktop/Pokemon.mp3'
+            pg.mixer.init()
+            track = pg.mixer.music.load(file2)
+            pg.mixer.music.play()
+
+
+            if 40 >= remaining_time > 38 or 2 >= remaining_time > 0:
                 screen.blit(bg1, (0, 0))
-                screen.blit(sun, (800, 130))
-            elif temp == 2 or temp == 8:
+                screen.blit(sun, (800, 100))
+            elif 38 >= remaining_time > 36 or 4 >= remaining_time > 2:
+                screen.blit(bg15, (0, 0))
+                screen.blit(sun, (800, 100))
+            elif 36 >= remaining_time > 34 or 6 >= remaining_time > 4:
                 screen.blit(bg2, (0, 0))
-                screen.blit(sun, (800, 130))
-            elif temp == 3 or temp == 7:
+                screen.blit(sun, (800, 100))
+            elif 34 >= remaining_time > 32 or 8 >= remaining_time > 6:
+                screen.blit(bg25, (0, 0))
+                screen.blit(sun, (800, 100))
+            elif 32 >= remaining_time > 30 or 10 >= remaining_time > 8:
                 screen.blit(bg3, (0, 0))
-                screen.blit(star1, (120, 70))
-            elif temp == 4 or temp == 6:
+            elif 30 >= remaining_time > 28 or 12 >= remaining_time > 10:
+                screen.blit(bg35, (0, 0))
+            elif 28 >= remaining_time > 26 or 14 >= remaining_time > 12:
                 screen.blit(bg4, (0, 0))
-                screen.blit(moon, (60, 130))
-                screen.blit(star1, (120, 70))
-            elif temp == 5:
+                screen.blit(moon, (60, 70))
+            elif 26 >= remaining_time > 24 or 16 >= remaining_time > 14:
+                screen.blit(bg45, (0, 0))
+                screen.blit(moon, (60, 70))
+                screen.blit(star2, (570, 230))
+            elif 24 >= remaining_time > 22 or 18 >= remaining_time > 16:
                 screen.blit(bg5, (0, 0))
-                screen.blit(moon, (60, 130))
-                screen.blit(star1, (120, 70))
-                screen.blit(star2, (520, 230))
+                screen.blit(moon, (60, 70))
+                screen.blit(star1, (120, 190))
+                screen.blit(star2, (570, 230))
+            elif 22 >= remaining_time > 20 or 20 >= remaining_time > 18:
+                screen.blit(bg55, (0, 0))
+                screen.blit(moon, (60, 70))
+                screen.blit(star1, (120, 190))
+                screen.blit(star2, (570, 230))
+
+
+
 
             # 將原時間用畫布蓋住
-            cover = pg.Surface((150, 40))
+            cover = pg.Surface((45, 35))
             cover = cover.convert()
-            if temp == 1:
-                cover.fill((24, 151, 229))
-            elif temp == 2 or temp == 8:
-                cover.fill((0, 96, 209))
-            elif temp == 3 or temp == 7:
-                cover.fill((0, 44, 184))
-            elif temp == 4 or temp == 6:
-                cover.fill((1, 5, 168))
-            elif temp == 5:
-                cover.fill((0, 0, 122))
+            cover.fill((40, 34, 28))
 
 
 
@@ -214,25 +253,25 @@ while True:
                         wrong += 1
                         combo = 0
 
-                if correct >= 5:
+                if scores >= 100:
                     screen.blit(blues, [640, 570])
-                if correct >= 10:
+                if scores >= 200:
                     screen.blit(pinks, [350, 600])
-                if correct >= 15:
+                if scores >= 350:
                     screen.blit(oranges, [500, 590])
-                if correct >= 20:
+                if scores >= 500:
                     screen.blit(grasses, [420, 630])
-                if correct >= 25:
+                if scores >= 650:
                     screen.blit(trees, [580, 230])
-                if correct >= 30:
+                if scores >= 800:
                     screen.blit(blues, [100, 580])
-                if correct >= 35:
+                if scores >= 1000:
                     screen.blit(pinks, [800, 500])
-                if correct >= 40:
+                if scores >= 1200:
                     screen.blit(oranges, [260, 540])
-                if correct >= 45:
+                if scores >= 1500:
                     screen.blit(grasses, [520, 530])
-                if correct >= 50:
+                if scores >= 1800:
                     screen.blit(grasses, [280, 660])
 
 
@@ -257,72 +296,98 @@ while True:
                         screen.blit(finalballoon, (194 + 55 * i, 155))
                         screen.blit(text, (205 + 55 * i, 160))
 
-                if temp == 1:
-                    score_display = sfont.render("Score : %s" % scores, True, (10, 60, 150))
-                    correct_display = sfont.render("Correct : %s" % correct, True, (10, 60, 150))
-                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (10, 60, 150))
-                elif temp == 2 or temp == 8:
+                if 40 >= remaining_time > 38 or 2 >= remaining_time > 0:
+                    score_display = sfont.render("Score : %s" % scores, True, (0, 0, 111))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (0, 0, 111))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (0, 0, 111))
+                elif 38 >= remaining_time > 36 or 4 >= remaining_time > 2:
+                    score_display = sfont.render("Score : %s" % scores, True, (0, 0, 111))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (0, 0, 111))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (0, 0, 111))
+                elif 36 >= remaining_time > 34 or 6 >= remaining_time > 4:
+                    score_display = sfont.render("Score : %s" % scores, True, (0, 0, 111))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (0, 0, 111))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (0, 0, 111))
+                elif 34 >= remaining_time > 32 or 8 >= remaining_time > 6:
+                    score_display = sfont.render("Score : %s" % scores, True, (0, 0, 111))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (0, 0, 111))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (0, 0, 111))
+                elif 32 >= remaining_time > 30 or 10 >= remaining_time > 8:
                     score_display = sfont.render("Score : %s" % scores, True, (255, 255, 255))
                     correct_display = sfont.render("Correct : %s" % correct, True, (255, 255, 255))
                     wrong_display = sfont.render("Wrong : %s" % wrong, True, (255, 255, 255))
-                elif temp == 3 or temp == 7:
-                    score_display = sfont.render("Score : %s" % scores, True, (0, 0, 0))
-                    correct_display = sfont.render("Correct : %s" % correct, True, (0, 0, 0))
-                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (0, 0, 0))
-                elif temp == 4 or temp == 6:
-                    score_display = sfont.render("Score : %s" % scores, True, (0, 0, 0))
-                    correct_display = sfont.render("Correct : %s" % correct, True, (0, 0, 0))
-                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (0, 0, 0))
-                elif temp == 5:
+                elif 30 >= remaining_time > 28 or 12 >= remaining_time > 10:
+                    score_display = sfont.render("Score : %s" % scores, True, (255, 255, 255))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (255, 255, 255))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (255, 255, 255))
+                elif 28 >= remaining_time > 26 or 14 >= remaining_time > 12:
+                    score_display = sfont.render("Score : %s" % scores, True, (255, 255, 255))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (255, 255, 255))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (255, 255, 255))
+                elif 26 >= remaining_time > 24 or 16 >= remaining_time > 14:
+                    score_display = sfont.render("Score : %s" % scores, True, (255, 255, 255))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (255, 255, 255))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (255, 255, 255))
+                elif 24 >= remaining_time > 22 or 18 >= remaining_time > 16:
+                    score_display = sfont.render("Score : %s" % scores, True, (255, 255, 255))
+                    correct_display = sfont.render("Correct : %s" % correct, True, (255, 255, 255))
+                    wrong_display = sfont.render("Wrong : %s" % wrong, True, (255, 255, 255))
+                elif 22 >= remaining_time > 20 or 20 >= remaining_time > 18:
                     score_display = sfont.render("Score : %s" % scores, True, (255, 255, 255))
                     correct_display = sfont.render("Correct : %s" % correct, True, (255, 255, 255))
                     wrong_display = sfont.render("Wrong : %s" % wrong, True, (255, 255, 255))
 
 
-                screen.blit(score_display, (360, 270))
-                screen.blit(correct_display, (360, 320))
-                screen.blit(wrong_display, (360, 370))
+                screen.blit(score_display, (360, 255))
+                screen.blit(correct_display, (360, 295))
+                screen.blit(wrong_display, (360, 335))
 
 
 
-                if move1 == 20 and correct < 20:
+                if move1 == 20:
+                    temp += 1
                     move1 = 0
-
-                    if temp <= 7:
-                        temp += 1
-                    elif temp == 8:
-                        temp = 1
-
-
                     total_onlyletters = onlyletters_per_game()
                     total_balloons = balloons_per_game()
                     pg.display.update()
 
-                elif move1 == 20 and correct >= 20:
-                    move1 = 0
+                    # if temp >= 3:
+                    #     total_numletters = numletters_per_game()
+                    #     total_balloons = balloons_per_game()
+                    #     pg.display.update()
+                    # if temp < 3:
+                    #     total_onlyletters = onlyletters_per_game()
+                    #     total_balloons = balloons_per_game()
+                    #     pg.display.update()
 
-                    if temp <= 7:
-                        temp += 1
-                    elif temp == 8:
-                        temp = 1
 
+                    # if correct < 20:
+                    #     total_onlyletters = onlyletters_per_game()
+                    #     total_balloons = balloons_per_game()
+                    #     pg.display.update()
+                    # elif correct >= 20:
+                    #     total_numletters = numletters_per_game()
+                    #     total_balloons = balloons_per_game()
+                    #     pg.display.update()
 
-                    total_numletters = numletters_per_game()
-                    total_balloons = balloons_per_game()
-                    pg.display.update()
 
 
 
     if countdown:
         current_time = time.perf_counter()
         remaining_time = int(limited_time - (current_time - start_time)) + 1
-        text = font.render("Time: %s" % remaining_time, True, (255, 255, 255))
-        screen.blit(cover, (780, 65))
-        screen.blit(text, (780, 65))
+        text = font.render("%s" % remaining_time, True, (255, 255, 255))
+        screen.blit(bomb, (800, 570))
+        screen.blit(cover, (850, 640))
+        screen.blit(text, (845, 635))
+
+
+
         if remaining_time <= 0:
             game_active = False
             game_result = True
             countdown = False
+
 
     if game_result:
         if correct != 0:
@@ -333,6 +398,11 @@ while True:
             accuracy = 0
             total_speed = 0
             precise_speed = 0
+        
+        # file3 = r'/Users/xinyi/Desktop/Closer.mp3'
+        # pg.mixer.init()
+        # track = pg.mixer.music.load(file3)
+        # pg.mixer.music.play()
 
         screen.fill((0, 0, 0))
         screen.blit(bg_3, (0, 0))
