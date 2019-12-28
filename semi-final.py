@@ -19,45 +19,44 @@ class Settings():
         self.lfont = pg.font.SysFont("Comic Sans MS", 122)
 
         # 顏色
-        self.PINK = (255, 192, 203)
-
         self.WHITE = (255, 255, 255)
         self.BLACK = (0, 0, 0)
+        self.PINK = (255, 192, 203)
         self.DARKBLUE = (0, 0, 111)
 
         # 時間
         self.limited_time = 40
 
         # 載入多個檔案
-        self.bg1_1 = pg.image.load("bg1_1.jpg")
-        self.bg1_2 = pg.image.load("bg1_2.jpg")
-        self.bg2_1 = pg.image.load("bg2_1.jpg")
-        self.bg2_2 = pg.image.load("bg2_2.jpg")
-        self.bg3_1 = pg.image.load("bg3_1.jpg")
-        self.bg3_2 = pg.image.load("bg3_2.jpg")
-        self.bg4_1 = pg.image.load("bg4_1.jpg")
-        self.bg4_2 = pg.image.load("bg4_2.jpg")
-        self.bg5_1 = pg.image.load("bg5_1.jpg")
-        self.bg5_2 = pg.image.load("bg5_2.jpg")
-        self.main_bg = pg.image.load("main_bg.jpg")
-        self.result_bg = pg.image.load("result_bg.jpg")
-        self.blue_f_image = pg.image.load('blue_flower.png')
-        self.pink_f_image = pg.image.load('pink_flower.png')
-        self.orange_f_image = pg.image.load('orange_flower.png')
-        self.tree_image = pg.image.load('tree.png')
-        self.grass_image = pg.image.load('grass.png')
-        self.yellow_b_image = pg.image.load('yellow_balloon.png')
-        self.orange_b_image = pg.image.load('orange_balloon.png')
-        self.green_b_image = pg.image.load('green_balloon.png')
-        self.purple_b_image = pg.image.load('purple_balloon.png')
-        self.blue_b_image = pg.image.load('blue_balloon.png')
-        self.red_b_image = pg.image.load('red_balloon.png')
-        self.sun_image = pg.image.load('sun.png')
-        self.moon_image = pg.image.load('moon.png')
-        self.star1_image = pg.image.load('star1.png')
-        self.star2_image = pg.image.load('star2.png')
-        self.bomb_image = pg.image.load('bomb.png')
-        self.bg_music_file = r'bg_song.mp3'
+        self.bg1_1 = pg.image.load("/Users/terence/Documents/pyCourse/bg1_1.jpg")
+        self.bg1_2 = pg.image.load("/Users/terence/Documents/pyCourse/bg1_2.jpg")
+        self.bg2_1 = pg.image.load("/Users/terence/Documents/pyCourse/bg2_1.jpg")
+        self.bg2_2 = pg.image.load("/Users/terence/Documents/pyCourse/bg2_2.jpg")
+        self.bg3_1 = pg.image.load("/Users/terence/Documents/pyCourse/bg3_1.jpg")
+        self.bg3_2 = pg.image.load("/Users/terence/Documents/pyCourse/bg3_2.jpg")
+        self.bg4_1 = pg.image.load("/Users/terence/Documents/pyCourse/bg4_1.jpg")
+        self.bg4_2 = pg.image.load("/Users/terence/Documents/pyCourse/bg4_2.jpg")
+        self.bg5_1 = pg.image.load("/Users/terence/Documents/pyCourse/bg5_1.jpg")
+        self.bg5_2 = pg.image.load("/Users/terence/Documents/pyCourse/bg5_2.jpg")
+        self.main_bg = pg.image.load("/Users/terence/Documents/pyCourse/main_bg.jpg")
+        self.result_bg = pg.image.load("/Users/terence/Documents/pyCourse/result_bg.jpg")
+        self.blue_f_image = pg.image.load('/Users/terence/Documents/pyCourse/blue_flower.png')
+        self.pink_f_image = pg.image.load('/Users/terence/Documents/pyCourse/pink_flower.png')
+        self.orange_f_image = pg.image.load('/Users/terence/Documents/pyCourse/orange_flower.png')
+        self.tree_image = pg.image.load('/Users/terence/Documents/pyCourse/tree.png')
+        self.grass_image = pg.image.load('/Users/terence/Documents/pyCourse/grass.png')
+        self.yellow_b_image = pg.image.load('/Users/terence/Documents/pyCourse/yellow_balloon.png')
+        self.orange_b_image = pg.image.load('/Users/terence/Documents/pyCourse/orange_balloon.png')
+        self.green_b_image = pg.image.load('/Users/terence/Documents/pyCourse/green_balloon.png')
+        self.purple_b_image = pg.image.load('/Users/terence/Documents/pyCourse/purple_balloon.png')
+        self.blue_b_image = pg.image.load('/Users/terence/Documents/pyCourse/blue_balloon.png')
+        self.red_b_image = pg.image.load('/Users/terence/Documents/pyCourse/red_balloon.png')
+        self.sun_image = pg.image.load('/Users/terence/Documents/pyCourse/sun.png')
+        self.moon_image = pg.image.load('/Users/terence/Documents/pyCourse/moon.png')
+        self.star1_image = pg.image.load('/Users/terence/Documents/pyCourse/star1.png')
+        self.star2_image = pg.image.load('/Users/terence/Documents/pyCourse/star2.png')
+        self.bomb_image = pg.image.load('/Users/terence/Documents/pyCourse/bomb.png')
+        self.bg_music_file = r'/Users/terence/Documents/pyCourse/bg_song.mp3'
 
         #調整物件大小
         self.blue_f = pg.transform.scale(self.blue_f_image, (60, 80))
@@ -149,64 +148,64 @@ class Settings():
             screen.blit(my_setting.grass, [280, 660])
 
         for i in range(10 - Move):
-            text = my_setting.mfont.render(letters[i + Move], True, (0, 0, 0))
+            text = my_setting.mfont.render(letters[i + Move], True, my_setting.BLACK)
             finalballoon = balloon[i + Move]
             screen.blit(finalballoon, (194 + 55 * (i + Move), 75))
             screen.blit(text, (205 + 55 * (i + Move), 80))
 
         if Move > 10:
             for i in range(10 - (Move - 10)):
-                text = my_setting.mfont.render(letters[i + 10 + (Move - 10)], True, (0, 0, 0))
+                text = my_setting.mfont.render(letters[i + 10 + (Move - 10)], True, my_setting.BLACK)
                 finalballoon = balloon[i + 10 + (Move - 10)]
                 screen.blit(finalballoon, (194 + 55 * (i + (Move - 10)), 155))
                 screen.blit(text, (205 + 55 * (i + (Move - 10)), 160))
         else:
             for i in range(10):
-                text = my_setting.mfont.render(letters[i + 10], True, (0, 0, 0))
+                text = my_setting.mfont.render(letters[i + 10], True, my_setting.BLACK)
                 finalballoon = balloon[i + 10]
                 screen.blit(finalballoon, (194 + 55 * i, 155))
                 screen.blit(text, (205 + 55 * i, 160))
 
         if 40 >= Time > 38 or 2 >= Time > 0:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (0, 0, 111))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (0, 0, 111))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (0, 0, 111))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.DARKBLUE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.DARKBLUE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.DARKBLUE)
         elif 38 >= Time > 36 or 4 >= Time > 2:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (0, 0, 111))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (0, 0, 111))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (0, 0, 111))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.DARKBLUE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.DARKBLUE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.DARKBLUE)
         elif 36 >= Time > 34 or 6 >= Time > 4:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (0, 0, 111))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (0, 0, 111))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (0, 0, 111))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.DARKBLUE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.DARKBLUE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.DARKBLUE)
         elif 34 >= Time > 32 or 8 >= Time > 6:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (0, 0, 111))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (0, 0, 111))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (0, 0, 111))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.DARKBLUE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.DARKBLUE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.DARKBLUE)
         elif 32 >= Time > 30 or 10 >= Time > 8:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (255, 255, 255))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (255, 255, 255))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (255, 255, 255))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.WHITE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.WHITE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.WHITE)
         elif 30 >= Time > 28 or 12 >= Time > 10:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (255, 255, 255))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (255, 255, 255))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (255, 255, 255))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.WHITE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.WHITE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.WHITE)
         elif 28 >= Time > 26 or 14 >= Time > 12:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (255, 255, 255))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (255, 255, 255))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (255, 255, 255))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.WHITE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.WHITE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.WHITE)
         elif 26 >= Time > 24 or 16 >= Time > 14:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (255, 255, 255))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (255, 255, 255))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (255, 255, 255))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.WHITE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.WHITE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.WHITE)
         elif 24 >= Time > 22 or 18 >= Time > 16:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (255, 255, 255))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (255, 255, 255))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (255, 255, 255))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.WHITE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.WHITE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.WHITE)
         elif 22 >= Time > 20 or 20 >= Time > 18:
-            score_display = my_setting.sfont.render("Score : %s" % Score, True, (255, 255, 255))
-            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, (255, 255, 255))
-            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, (255, 255, 255))
+            score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.WHITE)
+            Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.WHITE)
+            Wrong_display = my_setting.sfont.render("Wrong : %s" % Wrong, True, my_setting.WHITE)
 
         screen.blit(score_display, (360, 255))
         screen.blit(Correct_display, (360, 295))
@@ -230,7 +229,7 @@ countdown = False
 # 設定視窗(可省
 screen = pg.display.set_mode((my_setting.width, my_setting.height))
 pg.display.set_caption("Typing speed game")
-screen.fill((255, 255, 255))
+screen.fill(my_setting.WHITE)
 
 # 儲存一次遊戲中的全部字母（20個）
 total_onlyletters = my_setting.onlyletters_per_game()
@@ -254,7 +253,7 @@ while True:
                 pg.quit()
                 exit()
 
-        screen.fill((0, 0, 0))
+        screen.fill(my_setting.BLACK)
 
         keys = pg.key.get_pressed()
         if keys[pg.K_RETURN] and not game_active:
@@ -278,9 +277,9 @@ while True:
         if game_main:
 
             screen.blit(my_setting.main_bg, (0, 0))
-            text = my_setting.sfont.render("Press enter to start", True, (0, 0, 0), (255, 255, 255))
+            text = my_setting.sfont.render("Press enter to start", True, my_setting.BLACK)
             screen.blit(text, (341, 500))
-            text = my_setting.lfont.render("Typing Game", True, (0, 0, 0), (255, 255, 255))
+            text = my_setting.lfont.render("Typing Game", True, my_setting.BLACK, my_setting.WHITE)
             screen.blit(text, (215, 240))
 
         # 遊戲進行時執行的操作
@@ -328,7 +327,7 @@ while True:
     if countdown:
         current_time = time.perf_counter()
         remaining_time = int(limited_time - (current_time - start_time)) + 1
-        text = my_setting.mfont.render("%s" % remaining_time, True, (255, 255, 255))
+        text = my_setting.mfont.render("%s" % remaining_time, True, my_setting.WHITE)
 
         # 將原時間用畫布蓋住
         cover = pg.Surface((45, 35))
@@ -354,23 +353,23 @@ while True:
             total_speed = 0
             precise_speed = 0
 
-        screen.fill((0, 0, 0))
+        screen.fill(my_setting.BLACK)
         screen.blit(my_setting.result_bg, (0, 0))
-        text = my_setting.sfont.render("Score: %s" % scores, True, (255, 192, 203))
+        text = my_setting.sfont.render("Score: %s" % scores, True, my_setting.PINK)
         screen.blit(text, (180, 100))
-        text = my_setting.sfont.render("Best Combo: %s" % max_combo, True, (255, 192, 203))
+        text = my_setting.sfont.render("Best Combo: %s" % max_combo, True, my_setting.PINK)
         screen.blit(text, (180, 160))
-        text = my_setting.sfont.render("Correct: %s" % correct, True, (255, 192, 203))
+        text = my_setting.sfont.render("Correct: %s" % correct, True, my_setting.PINK)
         screen.blit(text, (180, 220))
-        text = my_setting.sfont.render("Wrong: %s" % wrong, True, (255, 192, 203))
+        text = my_setting.sfont.render("Wrong: %s" % wrong, True, my_setting.PINK)
         screen.blit(text, (180, 280))
-        text = my_setting.sfont.render("Accuracy: %s" % accuracy + "%", True, (255, 192, 203))
+        text = my_setting.sfont.render("Accuracy: %s" % accuracy + "%", True, my_setting.PINK)
         screen.blit(text, (180, 340))
-        text = my_setting.sfont.render("Total speed: %s words/min" % total_speed, True, (255, 192, 203))
+        text = my_setting.sfont.render("Total speed: %s words/min" % total_speed, True, my_setting.PINK)
         screen.blit(text, (180, 400))
-        text = my_setting.sfont.render("Precise speed: %s words/min" % precise_speed, True, (255, 192, 203))
+        text = my_setting.sfont.render("Precise speed: %s words/min" % precise_speed, True, my_setting.PINK)
         screen.blit(text, (180, 460))
-        text = my_setting.sfont.render("Press enter to retry", True, (255, 192, 203))
+        text = my_setting.sfont.render("Press enter to retry", True, my_setting.PINK)
         screen.blit(text, (300, 580))
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RETURN:
