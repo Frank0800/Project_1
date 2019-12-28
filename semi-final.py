@@ -346,8 +346,8 @@ while True:
     if game_result:
         if correct != 0:
             accuracy = (100 * correct / (correct + wrong)) // 1
-            total_speed = 2 * (correct + wrong)
-            precise_speed = 2 * correct
+            total_speed = 1.5 * (correct + wrong)
+            precise_speed = 1.5 * correct
         else:
             accuracy = 0
             total_speed = 0
