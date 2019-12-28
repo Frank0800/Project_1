@@ -24,10 +24,10 @@ class Settings():
         self.PINK = (255, 192, 203)
         self.DARKBLUE = (0, 0, 111)
 
-        # 時間
+        # 遊戲時間
         self.limited_time = 40
 
-        # 載入多個檔案
+        # 載入多個圖檔與音樂
         self.bg1_1 = pg.image.load("bg1_1.jpg")
         self.bg1_2 = pg.image.load("bg1_2.jpg")
         self.bg2_1 = pg.image.load("bg2_1.jpg")
@@ -56,7 +56,7 @@ class Settings():
         self.star1_image = pg.image.load('star1.png')
         self.star2_image = pg.image.load('star2.png')
         self.bomb_image = pg.image.load('bomb.png')
-        self.bg_music_file = r'bg_song.mp3'
+        self.bg_music_file = r'finalbgm.mp3'
 
         #調整物件大小
         self.blue_f = pg.transform.scale(self.blue_f_image, (60, 80))
@@ -76,6 +76,7 @@ class Settings():
         self.star2 = pg.transform.scale(self.star2_image, (25, 25))
         self.bomb = pg.transform.scale(self.bomb_image, (150, 150))
 
+    # 隨機顯示出20個英文字母
     def onlyletters_per_game(self):
         onlyletters = []
         for each in range(20):
@@ -83,6 +84,7 @@ class Settings():
             onlyletters.append(onlyletter)
         return onlyletters
 
+    # 隨機於不同顏色的氣球中顯示出20個氣球
     def balloons_per_game(self):
         balloonord = [my_setting.yellow_b, my_setting.orange_b, my_setting.green_b, my_setting.purple_b, my_setting.blue_b, my_setting.red_b]
         balloons = []
@@ -91,6 +93,7 @@ class Settings():
             balloons.append(balloon)
         return balloons
 
+    # 遊戲背景由白天逐漸轉黑夜再到白天，共十種亮度，每兩秒變換一次
     def game_bg(self, Time, Move, Score, Correct, Wrong, letters, balloon):
         if 40 >= Time > 38 or 2 >= Time > 0:
             screen.blit(my_setting.bg1_1, (0, 0))
@@ -126,6 +129,7 @@ class Settings():
             screen.blit(my_setting.star1, (120, 190))
             screen.blit(my_setting.star2, (570, 230))
 
+        # 當分數超過某些特定值時，會出現花草樹木作為獎勵
         if Score >= 100:
             screen.blit(my_setting.blue_f, [640, 570])
         if Score >= 200:
@@ -147,6 +151,7 @@ class Settings():
         if Score >= 1800:
             screen.blit(my_setting.grass, [280, 660])
 
+        # 隨機出現一組（20個）英文字母與氣球（一排10個，共兩排）
         for i in range(10 - Move):
             text = my_setting.mfont.render(letters[i + Move], True, my_setting.BLACK)
             finalballoon = balloon[i + Move]
@@ -166,6 +171,7 @@ class Settings():
                 screen.blit(finalballoon, (194 + 55 * i, 155))
                 screen.blit(text, (205 + 55 * i, 160))
 
+        # 顯示資訊（答對數量、答錯數量、分數）隨著背景改變而調整顏色
         if 40 >= Time > 38 or 2 >= Time > 0:
             score_display = my_setting.sfont.render("Score : %s" % Score, True, my_setting.DARKBLUE)
             Correct_display = my_setting.sfont.render("Correct : %s" % Correct, True, my_setting.DARKBLUE)
@@ -218,20 +224,22 @@ my_setting = Settings()
 
 # 遊戲時間限制
 limited_time = my_setting.limited_time
+
 # 遊戲觸發器
 game_main = True
 game_active = False
 game_result = False
+
 # 計時器
 timing = False
 countdown = False
 
-# 設定視窗(可省
+# 設定視窗(可省）
 screen = pg.display.set_mode((my_setting.width, my_setting.height))
 pg.display.set_caption("Typing speed game")
 screen.fill(my_setting.WHITE)
 
-# 儲存一次遊戲中的全部字母（20個）
+# 儲存遊戲時一次出現的一組（20個）字母
 total_onlyletters = my_setting.onlyletters_per_game()
 total_balloons = my_setting.balloons_per_game()
 pg.display.update()
@@ -273,9 +281,8 @@ while True:
             countdown = True
             timing = False
 
-        # 遊戲還未開始時執行的操作
+        # 遊戲還未開始時執行的操作、顯示資訊
         if game_main:
-
             screen.blit(my_setting.main_bg, (0, 0))
             text = my_setting.sfont.render("Press enter to start", True, my_setting.BLACK)
             screen.blit(text, (341, 500))
@@ -284,11 +291,8 @@ while True:
 
         # 遊戲進行時執行的操作
         if game_active:
-
             if 0 <= move <= 20:
-
                 total_letters = total_onlyletters
-
                 if event.type == pg.KEYDOWN and event.key != pg.K_RETURN:
                     move += 1
                     if event.key == ord(total_letters[move - 1]):
@@ -310,20 +314,22 @@ while True:
                             scores += 300
                         elif combo >= 200:
                             scores += 1000
-
                     else:
                         wrong += 1
                         combo = 0
+
+                # 當一組（20個）字母都按完之後，再隨機出現一組新的以繼續遊戲
                 if move == 20:
                     total_onlyletters = my_setting.onlyletters_per_game()
                     total_balloons = my_setting.balloons_per_game()
 
-    # 顯示背景、物件
+    # 顯示遊戲進行時之背景、物件
     if game_active:
         my_setting.game_bg(remaining_time, move, scores, correct, wrong, total_letters, total_balloons)
         if move == 20:
             move = 0
 
+    # 計時器
     if countdown:
         current_time = time.perf_counter()
         remaining_time = int(limited_time - (current_time - start_time)) + 1
@@ -338,11 +344,13 @@ while True:
         screen.blit(cover, (850, 640))
         screen.blit(text, (845, 635))
 
+        # 時間到則遊戲結束，進入到下一個顯示分數的畫面
         if remaining_time <= 0:
             game_active = False
             game_result = True
             countdown = False
 
+    # 遊戲結束後，顯示遊戲情況與資訊（分數、答對率、速率等等）
     if game_result:
         if correct != 0:
             accuracy = (100 * correct / (correct + wrong)) // 1
@@ -371,6 +379,8 @@ while True:
         screen.blit(text, (180, 460))
         text = my_setting.sfont.render("Press enter to retry", True, my_setting.PINK)
         screen.blit(text, (300, 580))
+
+        # 按下Enter鍵之後重新開始遊戲
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RETURN:
                 scores = 0
