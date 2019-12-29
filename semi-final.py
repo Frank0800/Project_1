@@ -9,6 +9,7 @@ pg.init()
 class Settings():
 
     def __init__(self):
+        
         # 視窗大小
         self.width = 960
         self.height = 720
@@ -129,7 +130,7 @@ class Settings():
             screen.blit(my_setting.star1, (120, 190))
             screen.blit(my_setting.star2, (570, 230))
 
-        # 當分數超過某些特定值時，會出現花草樹木作為獎勵
+        # 當分數超過某些特定值時，會出現花草樹木作為獎勵，增加畫面豐富度
         if Score >= 100:
             screen.blit(my_setting.blue_f, [640, 570])
         if Score >= 200:
@@ -152,12 +153,14 @@ class Settings():
             screen.blit(my_setting.grass, [280, 660])
 
         # 隨機出現一組（20個）英文字母與氣球（一排10個，共兩排）
+        # 第一列的顯示與消失
         for i in range(10 - Move):
             text = my_setting.mfont.render(letters[i + Move], True, my_setting.BLACK)
             finalballoon = balloon[i + Move]
             screen.blit(finalballoon, (194 + 55 * (i + Move), 75))
             screen.blit(text, (205 + 55 * (i + Move), 80))
-
+        
+        # 第二列的顯示與消失
         if Move > 10:
             for i in range(10 - (Move - 10)):
                 text = my_setting.mfont.render(letters[i + 10 + (Move - 10)], True, my_setting.BLACK)
@@ -234,7 +237,7 @@ game_result = False
 timing = False
 countdown = False
 
-# 設定視窗(可省）
+# 設定視窗
 screen = pg.display.set_mode((my_setting.width, my_setting.height))
 pg.display.set_caption("Typing speed game")
 screen.fill(my_setting.WHITE)
@@ -244,13 +247,13 @@ total_onlyletters = my_setting.onlyletters_per_game()
 total_balloons = my_setting.balloons_per_game()
 pg.display.update()
 
-#播放背景音樂
+#播放背景音樂（循環50次）
 file = my_setting.bg_music_file
 pg.mixer.init()
 track = pg.mixer.music.load(file)
 pg.mixer.music.play(loops=50)
 
-# 關閉程式的程式碼
+# 進入遊戲流程
 while True:
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -262,7 +265,8 @@ while True:
                 exit()
 
         screen.fill(my_setting.BLACK)
-
+        
+        # 進入遊戲觸發位置
         keys = pg.key.get_pressed()
         if keys[pg.K_RETURN] and not game_active:
             scores = 0
@@ -275,13 +279,14 @@ while True:
             game_main = False
             game_active = True
             timing = True
-
+        
+        # 時間計時觸發器
         if timing:
             start_time = time.perf_counter()
             countdown = True
             timing = False
 
-        # 遊戲還未開始時執行的操作、顯示資訊
+        # 遊戲還未開始時執行的操作、顯示資訊（遊戲主頁）
         if game_main:
             screen.blit(my_setting.main_bg, (0, 0))
             text = my_setting.sfont.render("Press enter to start", True, my_setting.BLACK)
@@ -293,7 +298,7 @@ while True:
         if game_active:
             if 0 <= move <= 20:
                 total_letters = total_onlyletters
-                if event.type == pg.KEYDOWN and event.key != pg.K_RETURN:
+                if event.type == pg.KEYDOWN and event.key != pg.K_RETURN:       #偵測鍵盤事件
                     move += 1
                     if event.key == ord(total_letters[move - 1]):
                         correct += 1
@@ -339,7 +344,8 @@ while True:
         cover = pg.Surface((45, 35))
         cover = cover.convert()
         cover.fill((40, 34, 28))
-
+        
+        # 顯示炸彈與時間
         screen.blit(my_setting.bomb, (800, 570))
         screen.blit(cover, (850, 640))
         screen.blit(text, (845, 635))
